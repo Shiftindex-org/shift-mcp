@@ -1,3 +1,10 @@
-mcp>=1.0.0
+# Pinned to the 1.x line on purpose. mcp 2.x renamed FastMCP to MCPServer and changed
+# the API, and shift_mcp_server.py is written against 1.x.
+#
+# Measured 4 Oct 2026: with "mcp>=1.0.0" the image installed 2.x and the MCP service
+# died at import --
+#   ModuleNotFoundError: No module named 'mcp.server.fastmcp'
+# The REST service (shift_api.py) never imports mcp, so it was not affected either way.
+mcp>=1.0,<2
 fastapi>=0.110
 uvicorn[standard]>=0.29
